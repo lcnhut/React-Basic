@@ -6,6 +6,10 @@ This project is a collection of tasks from my ReactJS class.
 
 In the project directory, you can run:
 
+### `npm i`
+
+Install all neccessary packages.
+
 ### `npm start`
 
 Runs the app in the development mode.\
