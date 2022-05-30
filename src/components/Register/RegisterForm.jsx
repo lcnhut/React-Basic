@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
 import "./RegisterForm.scss";
 
 const RegisterForm = (props) => {
-  const { handleOnSubmitForm } = props;
+  const { handleOnSubmitRegisterForm } = props;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +11,7 @@ const RegisterForm = (props) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -75,6 +75,14 @@ const RegisterForm = (props) => {
     }
   };
 
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
+
   const handleSubmitForm = () => {
     if (name === "") {
       setNameError("This field is required");
@@ -87,12 +95,18 @@ const RegisterForm = (props) => {
     }
     if (confirmPassword === "") {
       setConfirmPasswordError("This field is required");
-    } else {
-      alert("Register Successfully!!!");
+    } else if (
+      name !== "" &&
+      email !== "" &&
+      password !== "" &&
+      confirmPassword !== ""
+    ) {
       setName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+
+      handleOnSubmitRegisterForm();
     }
   };
   return (
@@ -127,24 +141,38 @@ const RegisterForm = (props) => {
           </div>
           <div className="input__field">
             <label htmlFor="">Password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => handleOnChangePassword(e)}
-              onBlur={handleOnBlurPassword}
-            />
+            <div className="input__wrapper">
+              <input
+                type={passwordType}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => handleOnChangePassword(e)}
+                onBlur={handleOnBlurPassword}
+              />
+              {passwordType === "password" ? (
+                <i className="fas fa-eye-slash" onClick={togglePassword}></i>
+              ) : (
+                <i className="fas fa-eye" onClick={togglePassword}></i>
+              )}
+            </div>
             <span className="error__message">{passwordError}</span>
           </div>
           <div className="input__field">
             <label htmlFor="">Confirm password</label>
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => handleOnChangeConfirmPassword(e)}
-              onBlur={handleOnBlurConfirmPassword}
-            />
+            <div className="input__wrapper">
+              <input
+                type={passwordType}
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => handleOnChangeConfirmPassword(e)}
+                onBlur={handleOnBlurConfirmPassword}
+              />
+              {passwordType === "password" ? (
+                <i className="fas fa-eye-slash" onClick={togglePassword}></i>
+              ) : (
+                <i className="fas fa-eye" onClick={togglePassword}></i>
+              )}
+            </div>
             <span className="error__message">{confirmPasswordError}</span>
           </div>
           <button className="submit__button" onClick={handleSubmitForm}>

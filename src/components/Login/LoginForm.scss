@@ -47,6 +47,17 @@
           }
         }
 
+        .input__wrapper {
+          position: relative;
+          i {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+          }
+        }
+
         span.error__message {
           color: red;
           display: block;

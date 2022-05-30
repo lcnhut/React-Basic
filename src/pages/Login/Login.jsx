@@ -3,45 +3,71 @@ import { useState } from "react";
 import "./Login.scss";
 import RegisterForm from "../../components/Register/RegisterForm";
 import LoginForm from "../../components/Login/LoginForm";
+import Loading from "../../components/Loading/Loading";
 
 const Login = () => {
   const [isActiveForm, setActiveForm] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnSwitchForm = () => {
     setActiveForm(!isActiveForm);
   };
 
-  const handleOnSubmitForm = () => {
-    console.log("Form submit: ");
+  const handleOnSubmitRegisterForm = () => {
+    setIsLoading(true);
+    console.log("loading");
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setActiveForm(!isActiveForm);
+    }, 5000);
+  };
+
+  const handleOnSubmitLoginForm = () => {
+    setIsLoading(true);
+    console.log("loading");
+
+    setTimeout(() => {
+      setIsLoading(false);
+      alert("Login successfully!!!");
+    }, 5000);
   };
 
   return (
-    <div className="login__page__container">
-      <div className="login__page__wrapper">
-        <div className="login__page__heading">
-          <a href="#">Logdy</a>
-          <div>
-            <button
-              onClick={handleOnSwitchForm}
-              className={isActiveForm ? "active" : ""}
-            >
-              Login
-            </button>
-            <button
-              onClick={handleOnSwitchForm}
-              className={!isActiveForm ? "active" : ""}
-            >
-              Register
-            </button>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="login__page__container">
+          <div className="login__page__wrapper">
+            <div className="login__page__heading">
+              <a href="#">Logdy</a>
+              <div>
+                <button
+                  onClick={handleOnSwitchForm}
+                  className={isActiveForm ? "active" : ""}
+                >
+                  Login
+                </button>
+                <button
+                  onClick={handleOnSwitchForm}
+                  className={!isActiveForm ? "active" : ""}
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+            {isActiveForm ? (
+              <LoginForm handleOnSubmitLoginForm={handleOnSubmitLoginForm} />
+            ) : (
+              <RegisterForm
+                handleOnSubmitRegisterForm={handleOnSubmitRegisterForm}
+              />
+            )}
           </div>
         </div>
-        {isActiveForm ? (
-          <LoginForm handleOnSubmitForm={handleOnSubmitForm} />
-        ) : (
-          <RegisterForm handleOnSubmitForm={handleOnSubmitForm} />
-        )}
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 export default Login;

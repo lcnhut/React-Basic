@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import "./LoginForm.scss";
 
 const LoginForm = (props) => {
-  const { handleOnSubmitForm } = props;
+  const { handleOnSubmitLoginForm } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -44,16 +45,24 @@ const LoginForm = (props) => {
     }
   };
 
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
+
   const handleSubmitForm = () => {
     if (email === "") {
       setEmailError("This field is required");
     }
     if (password === "") {
       setPasswordError("This field is required");
-    } else {
-      alert("Login Successfully!!!");
+    } else if (email !== "" && password !== "") {
       setEmail("");
       setPassword("");
+      handleOnSubmitLoginForm();
     }
   };
 
@@ -78,13 +87,20 @@ const LoginForm = (props) => {
           </div>
           <div className="input__field">
             <label htmlFor="">Password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => handleOnChangePassword(e)}
-              onBlur={handleOnBlurPassword}
-            />
+            <div className="input__wrapper">
+              <input
+                type={passwordType}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => handleOnChangePassword(e)}
+                onBlur={handleOnBlurPassword}
+              />
+              {passwordType === "password" ? (
+                <i className="fas fa-eye-slash" onClick={togglePassword}></i>
+              ) : (
+                <i className="fas fa-eye" onClick={togglePassword}></i>
+              )}
+            </div>
             <span className="error__message">{passwordError}</span>
           </div>
 
