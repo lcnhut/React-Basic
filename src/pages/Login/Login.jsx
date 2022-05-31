@@ -1,9 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { LoginForm, RegisterForm, Loading } from "../../components";
 import "./Login.scss";
-import RegisterForm from "../../components/Register/RegisterForm";
-import LoginForm from "../../components/Login/LoginForm";
-import Loading from "../../components/Loading/Loading";
 
 const Login = () => {
   const [isActiveForm, setActiveForm] = useState(true);

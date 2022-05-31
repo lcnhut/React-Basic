@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./LoginForm.scss";
+import Input from "../../Input";
+import "../Form.scss";
 
 const LoginForm = (props) => {
   const { handleOnSubmitLoginForm } = props;
@@ -7,7 +8,6 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [passwordType, setPasswordType] = useState("password");
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -45,14 +45,6 @@ const LoginForm = (props) => {
     }
   };
 
-  const togglePassword = () => {
-    if (passwordType === "password") {
-      setPasswordType("text");
-      return;
-    }
-    setPasswordType("password");
-  };
-
   const handleSubmitForm = () => {
     if (email === "") {
       setEmailError("This field is required");
@@ -67,43 +59,31 @@ const LoginForm = (props) => {
   };
 
   return (
-    <div className="login__wrapper">
-      <div className="login__content">
-        <div className="login__content__heading">
+    <div className="form__wrapper">
+      <div className="form__content">
+        <div className="form__content__heading">
           <h1>Welcome back!</h1>
           <h3>SIGN INTO YOUR ACCOUNT</h3>
         </div>
-        <div className="login__content__body">
-          <div className="input__field">
-            <label htmlFor="">Email address</label>
-            <input
-              type="text"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => handleOnChangeEmail(e)}
-              onBlur={handleOnBlurEmail}
-            />
-            <span className="error__message">{emailError}</span>
-          </div>
-          <div className="input__field">
-            <label htmlFor="">Password</label>
-            <div className="input__wrapper">
-              <input
-                type={passwordType}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => handleOnChangePassword(e)}
-                onBlur={handleOnBlurPassword}
-              />
-              {passwordType === "password" ? (
-                <i className="fas fa-eye-slash" onClick={togglePassword}></i>
-              ) : (
-                <i className="fas fa-eye" onClick={togglePassword}></i>
-              )}
-            </div>
-            <span className="error__message">{passwordError}</span>
-          </div>
-
+        <div className="form__content__body">
+          <Input
+            label="Email"
+            value={email}
+            placeholder="Email Address"
+            type="text"
+            onChange={handleOnChangeEmail}
+            onBlur={handleOnBlurEmail}
+            error={emailError}
+          />
+          <Input
+            label="Password"
+            value={password}
+            placeholder="Password"
+            type="password"
+            onChange={handleOnChangePassword}
+            onBlur={handleOnBlurPassword}
+            error={passwordError}
+          />
           <button className="submit__button" onClick={handleSubmitForm}>
             Login
           </button>

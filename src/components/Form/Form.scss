@@ -1,0 +1,43 @@
+.form {
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__content {
+    &__heading {
+      h1 {
+        color: #7878ff;
+      }
+      h3 {
+        margin: 0 0 35px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #040404;
+        text-transform: uppercase;
+      }
+    }
+
+    &__body {
+      .submit__button {
+        padding: 0 50px;
+        line-height: 46px;
+        background: #7878ff;
+        color: #fff;
+        text-align: center;
+        border: 2px solid transparent;
+        transition: all 0.7s ease;
+        border-radius: 3px;
+        font-size: 17px;
+        font-weight: 400;
+
+        &:hover {
+          cursor: pointer;
+          color: #7878ff;
+          border: 2px solid #7878ff;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
