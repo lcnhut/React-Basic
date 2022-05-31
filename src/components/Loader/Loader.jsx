@@ -1,10 +1,10 @@
 import React from "react";
-import "./Loading.scss";
+import "./Loader.scss";
 
-const Loading = () => {
+const Loader = () => {
   return (
-    <div className="loading__wrapper">
-      <div className="loading__content">
+    <div className="loader__wrapper">
+      <div className="loader__content">
         <h1 className="title">Loading</h1>
         <div className="rainbow-marker-loader"></div>
       </div>
@@ -12,4 +12,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default Loader;

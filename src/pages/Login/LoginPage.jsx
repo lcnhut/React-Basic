@@ -1,40 +1,38 @@
-import React from "react";
-import { useState } from "react";
-import { LoginForm, RegisterForm, Loading } from "../../components";
-import "./Login.scss";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Loader, LoginForm, RegisterForm } from "../../components";
+import { useGlobalData } from "../../components/GlobalProvider/GlobalDataProvider";
+import "./LoginPage.scss";
 
-const Login = () => {
+const LoginPage = () => {
+  const globalData = useGlobalData();
+  const { isLoading, register, login } = globalData;
+
   const [isActiveForm, setActiveForm] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleOnSwitchForm = () => {
     setActiveForm(!isActiveForm);
   };
 
   const handleOnSubmitRegisterForm = () => {
-    setIsLoading(true);
-    console.log("loading");
-
-    setTimeout(() => {
-      setIsLoading(false);
+    register();
+    if (!isLoading) {
       setActiveForm(!isActiveForm);
-    }, 5000);
+    }
   };
 
-  const handleOnSubmitLoginForm = () => {
-    setIsLoading(true);
-    console.log("loading");
-
-    setTimeout(() => {
-      setIsLoading(false);
-      alert("Login successfully!!!");
-    }, 5000);
+  const handleOnSubmitLoginForm = async () => {
+    const data = await login();
+    if (!isLoading && data) {
+      navigate(`/user/${data}`);
+    }
   };
 
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <Loader />
       ) : (
         <div className="login__page__container">
           <div className="login__page__wrapper">
@@ -68,4 +66,4 @@ const Login = () => {
     </>
   );
 };
-export default Login;
+export default LoginPage;

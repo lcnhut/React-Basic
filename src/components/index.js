@@ -1,4 +1,4 @@
 import Input from "./Input";
-import Loading from "./Loading/Loading";
+import Loader from "./Loader/Loader";
 import { LoginForm, RegisterForm } from "./Form";
-export { Input, Loading, LoginForm, RegisterForm };
+export { Input, Loader, LoginForm, RegisterForm };
