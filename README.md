@@ -2,6 +2,16 @@
 
 This project is a collection of tasks from my ReactJS class.
 
+### Setting Up Environment
+```
+  Node.js >= v14.17.4
+  NPM >= v6.14.14
+
+  OS: Linux or MacOS
+```
+### Check it out
+https://lcnhut.github.io/React-Basic/
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -17,3 +27,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+### `npm run build`
