@@ -2,6 +2,9 @@
 
 This project is a collection of tasks from my ReactJS class.
 
+### Check it out
+https://lcnhut.github.io/React-Basic/
+
 ## Available Scripts
 
 In the project directory, you can run:
