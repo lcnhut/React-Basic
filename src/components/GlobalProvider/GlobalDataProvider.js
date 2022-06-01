@@ -30,7 +30,7 @@ function GlobalDataProvider(props) {
       return {
         userId: response.userId,
       };
-    } else if (response.status === 400 || response.status === 500) {
+    } else if (response.status === 403) {
       setIsLoading(false);
       return {
         message: response.message,
