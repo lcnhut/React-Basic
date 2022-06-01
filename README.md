@@ -12,6 +12,11 @@ This project is a collection of tasks from my ReactJS class.
 ### Check it out
 https://react-basic-nfq-course.netlify.app/
 
+```
+email: admin@gmail.com
+password: Admin@123
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
