@@ -8,18 +8,25 @@ const LoginPage = () => {
   const { isLoading, register, login, notification, showNoti, hideNoti } =
     useGlobalData();
 
-  const [isActiveForm, setActiveForm] = useState(true);
+  const [isActiveLoginForm, setIsActiveLoginForm] = useState(true);
+  const [isActiveRegisterForm, setIsActiveRegisterForm] = useState(false);
   const navigate = useNavigate();
 
-  const handleOnSwitchForm = () => {
-    setActiveForm(!isActiveForm);
+  const handleOnSwitchToLogin = () => {
+    setIsActiveLoginForm(true);
+    setIsActiveRegisterForm(false);
+  };
+
+  const handleOnSwitchToRegister = () => {
+    setIsActiveLoginForm(false);
+    setIsActiveRegisterForm(true);
   };
 
   const handleOnSubmitRegisterForm = async () => {
     hideNoti();
     await register();
     if (!isLoading) {
-      setActiveForm(!isActiveForm);
+      handleOnSwitchToLogin();
       notification.success("Success", "Register Successfully!!!");
       showNoti();
     }
@@ -49,20 +56,20 @@ const LoginPage = () => {
               <a href="#">Logdy</a>
               <div>
                 <button
-                  onClick={handleOnSwitchForm}
-                  className={isActiveForm ? "active" : ""}
+                  onClick={handleOnSwitchToLogin}
+                  className={isActiveLoginForm ? "active" : ""}
                 >
                   Login
                 </button>
                 <button
-                  onClick={handleOnSwitchForm}
-                  className={!isActiveForm ? "active" : ""}
+                  onClick={handleOnSwitchToRegister}
+                  className={isActiveRegisterForm ? "active" : ""}
                 >
                   Register
                 </button>
               </div>
             </div>
-            {isActiveForm ? (
+            {isActiveLoginForm ? (
               <LoginForm handleOnSubmitLoginForm={handleOnSubmitLoginForm} />
             ) : (
               <RegisterForm

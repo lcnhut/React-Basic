@@ -45,7 +45,8 @@ const LoginForm = (props) => {
     }
   };
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
     if (email === "") {
       setEmailError("This field is required");
     }
@@ -62,7 +63,7 @@ const LoginForm = (props) => {
   };
 
   return (
-    <div className="form__wrapper">
+    <form className="form__wrapper" onSubmit={(e) => handleSubmitForm(e)}>
       <div className="form__content">
         <div className="form__content__heading">
           <h1>Welcome back!</h1>
@@ -87,12 +88,12 @@ const LoginForm = (props) => {
             onBlur={handleOnBlurPassword}
             error={passwordError}
           />
-          <button className="submit__button" onClick={handleSubmitForm}>
+          <button className="submit__button" type="submit">
             Login
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
