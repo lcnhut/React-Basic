@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Toast.scss";
 
 const Toast = (props) => {
@@ -9,11 +9,16 @@ const Toast = (props) => {
     setIsHidden(true);
   };
 
-  if (autoDelete) {
-    setTimeout(() => {
-      setIsHidden(true);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (autoDelete) {
+        setIsHidden(true);
+      }
     }, autoDeleteTime);
-  }
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <>

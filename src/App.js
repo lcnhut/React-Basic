@@ -7,13 +7,12 @@ import { useEffect, useState } from "react";
 import "./App.scss";
 
 function App() {
-  const globalData = useGlobalData();
-  const { toastProperties } = globalData;
-  const [isNotify, setIsNotify] = useState(globalData.isNotify);
+  const { isNotify, toastProperties } = useGlobalData();
+  const [isShowNoti, setIsShowNoti] = useState(isNotify);
 
   useEffect(() => {
-    setIsNotify(globalData.isNotify);
-  }, [globalData.isNotify]);
+    setIsShowNoti(isNotify);
+  }, [isNotify]);
 
   return (
     <div className="App">
@@ -22,7 +21,7 @@ function App() {
         <Route path="user/:id" element={<UserPage />} />
       </Routes>
 
-      {isNotify && (
+      {isShowNoti && (
         <Toast
           toast={toastProperties}
           position="top-right"

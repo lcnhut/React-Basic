@@ -5,7 +5,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to right, #e66465, #9198e5);
+    background-image: linear-gradient(to right, #b92b27, #1565c0);
+    // background-image: conic-gradient(
+    //   at 125% 50%,
+    //   #b78cf7,
+    //   #ff7c94,
+    //   #ffcf0d,
+    //   #ff7c94,
+    //   #b78cf7
+    // );
   }
   &__wrapper {
     padding: 60px;

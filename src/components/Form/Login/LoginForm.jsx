@@ -54,7 +54,10 @@ const LoginForm = (props) => {
     } else if (email !== "" && password !== "") {
       setEmail("");
       setPassword("");
-      handleOnSubmitLoginForm();
+      handleOnSubmitLoginForm({
+        email,
+        password,
+      });
     }
   };
 

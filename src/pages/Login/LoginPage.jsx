@@ -5,7 +5,8 @@ import { useGlobalData } from "../../components/GlobalProvider/GlobalDataProvide
 import "./LoginPage.scss";
 
 const LoginPage = () => {
-  const { isLoading, register, login, notifyMessage } = useGlobalData();
+  const { isLoading, register, login, notification, showNoti, hideNoti } =
+    useGlobalData();
 
   const [isActiveForm, setActiveForm] = useState(true);
   const navigate = useNavigate();
@@ -15,18 +16,25 @@ const LoginPage = () => {
   };
 
   const handleOnSubmitRegisterForm = async () => {
-    const response = await register();
-    if (!isLoading && response) {
+    hideNoti();
+    await register();
+    if (!isLoading) {
       setActiveForm(!isActiveForm);
-      notifyMessage.success("Success", "Register Successfully!!!");
+      notification.success("Success", "Register Successfully!!!");
+      showNoti();
     }
   };
 
-  const handleOnSubmitLoginForm = async () => {
-    const data = await login();
-    if (!isLoading && data) {
-      navigate(`/user/${data}`);
-      notifyMessage.success("Success", "Login Successfully!!!");
+  const handleOnSubmitLoginForm = async (user) => {
+    hideNoti();
+    const data = await login(user);
+    if (!isLoading && data.userId) {
+      navigate(`/user/${data.userId}`);
+      notification.success("Success", "Login Successfully!!!");
+      showNoti();
+    } else if (!isLoading && data.message) {
+      notification.error("Failure", data.message);
+      showNoti();
     }
   };
 

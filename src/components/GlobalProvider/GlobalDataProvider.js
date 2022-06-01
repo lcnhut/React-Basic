@@ -22,18 +22,32 @@ function GlobalDataProvider(props) {
     }
   };
 
-  const login = async () => {
+  const login = async (user) => {
     setIsLoading(true);
-    const response = await userApi.login();
+    const response = await userApi.login(user);
     if (response.status === 200) {
       setIsLoading(false);
-      return response.userId;
+      return {
+        userId: response.userId,
+      };
+    } else if (response.status === 500) {
+      setIsLoading(false);
+      return {
+        message: response.message,
+      };
     }
   };
 
-  const notifyMessage = {
+  const showNoti = () => {
+    setIsNotify(true);
+  };
+
+  const hideNoti = () => {
+    setIsNotify(false);
+  };
+
+  const notification = {
     success: (title, description) => {
-      setIsNotify(false);
       setToastProperties({
         id: Math.floor(Math.random() * 101 + 1),
         title: title,
@@ -41,7 +55,6 @@ function GlobalDataProvider(props) {
         backgroundColor: "#5cb85c",
         icon: checkIcon,
       });
-      setIsNotify(true);
     },
     error: (title, description) => {
       setToastProperties({
@@ -51,7 +64,6 @@ function GlobalDataProvider(props) {
         backgroundColor: "#d9534f",
         icon: errorIcon,
       });
-      setIsNotify(true);
     },
     info: (title, description) => {
       setToastProperties({
@@ -61,7 +73,6 @@ function GlobalDataProvider(props) {
         backgroundColor: "#5bc0de",
         icon: infoIcon,
       });
-      setIsNotify(true);
     },
     warn: (title, description) => {
       setToastProperties({
@@ -71,15 +82,16 @@ function GlobalDataProvider(props) {
         backgroundColor: "#f0ad4e",
         icon: warningIcon,
       });
-      setIsNotify(true);
     },
   };
 
   const providerValues = {
     isLoading,
     isNotify,
+    showNoti,
+    hideNoti,
     toastProperties,
-    notifyMessage,
+    notification,
     register,
     login,
   };
