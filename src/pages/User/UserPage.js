@@ -1,10 +1,7 @@
-import Toast from "../../components/Toast/Toast";
-import { useGlobalData } from "../../components/GlobalProvider/GlobalDataProvider";
-import "./UserPage.scss";
 import { useNavigate } from "react-router-dom";
+
+import "./UserPage.scss";
 const UserPage = () => {
-  const globalData = useGlobalData();
-  const { toastProperties } = globalData;
   const navigate = useNavigate();
 
   const onClickLogOut = () => {
@@ -20,12 +17,6 @@ const UserPage = () => {
       <button className="button" onClick={onClickLogOut}>
         Logout
       </button>
-      <Toast
-        toast={toastProperties}
-        position="top-right"
-        autoDelete={true}
-        autoDeleteTime={3000}
-      />
     </div>
   );
 };
