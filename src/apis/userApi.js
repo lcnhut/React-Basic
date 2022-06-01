@@ -18,6 +18,16 @@ export const userApi = {
             userId: "abc123",
           });
         }, 3000);
+      } else if (
+        user.email === "admin@gmail.com" &&
+        user.password !== "Admin@123"
+      ) {
+        setTimeout(() => {
+          resolve({
+            status: 400,
+            message: "Password is invalid!!!",
+          });
+        }, 3000);
       } else {
         setTimeout(() => {
           resolve({
