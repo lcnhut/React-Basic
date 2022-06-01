@@ -10,7 +10,7 @@ This project is a collection of tasks from my ReactJS class.
   OS: Linux or MacOS
 ```
 ### Check it out
-https://lcnhut.github.io/React-Basic/
+https://react-basic-nfq-course.netlify.app/
 
 ## Available Scripts
 
