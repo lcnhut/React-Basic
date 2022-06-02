@@ -52,7 +52,7 @@ const LoginForm = (props) => {
     }
     if (password === "") {
       setPasswordError("This field is required");
-    } else if (email !== "" && password !== "") {
+    } else if (emailError === "" && passwordError === "") {
       setEmail("");
       setPassword("");
       handleOnSubmitLoginForm({
