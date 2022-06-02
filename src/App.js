@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useGlobalData } from "./components/GlobalProvider/GlobalDataProvider";
-import Toast from "./components/Toast/Toast";
-
+import { useGlobalData } from "./components";
 import { LoginPage, Dashboard, SettingPage, NotFoundPage } from "./pages";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { ProtectedRoute, Toast } from "./components";
 import "./App.scss";
 
 function App() {

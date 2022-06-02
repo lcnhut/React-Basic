@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { GlobalDataProvider } from "./components/GlobalProvider/GlobalDataProvider";
+import { GlobalDataProvider } from "./components";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

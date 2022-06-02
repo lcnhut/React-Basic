@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader, LoginForm, RegisterForm } from "../../components";
-import { useGlobalData } from "../../components/GlobalProvider/GlobalDataProvider";
+import {
+  Loader,
+  LoginForm,
+  RegisterForm,
+  useGlobalData,
+} from "../../components";
 import "./LoginPage.scss";
 
 const LoginPage = () => {
