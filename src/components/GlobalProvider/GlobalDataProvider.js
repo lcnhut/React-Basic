@@ -27,8 +27,11 @@ function GlobalDataProvider(props) {
     const response = await userApi.login(user);
     if (response.status === 200) {
       setIsLoading(false);
+      window.localStorage.setItem("userToken", response.token);
+      window.localStorage.setItem("userRole", response.role);
+      window.localStorage.setItem("userName", response.userName);
       return {
-        userId: response.userId,
+        userId: response.token,
       };
     } else if (response.status === 403) {
       setIsLoading(false);

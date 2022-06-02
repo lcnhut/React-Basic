@@ -36,7 +36,7 @@ const LoginPage = () => {
     hideNoti();
     const data = await login(user);
     if (!isLoading && data.userId) {
-      navigate(`/user/${data.userId}`);
+      navigate("/dashboard");
       notification.success("Success", "Login Successfully!!!");
       showNoti();
     } else if (!isLoading && data.message) {
