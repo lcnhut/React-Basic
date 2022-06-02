@@ -17,6 +17,11 @@ email: admin@gmail.com
 password: Admin@123
 ```
 
+```
+email: nhut@gmail.com
+password: Nhut@123
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
