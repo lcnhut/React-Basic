@@ -12,11 +12,13 @@ This project is a collection of tasks from my ReactJS class.
 ### Check it out
 https://react-basic-nfq-course.netlify.app/
 
+Adminstrator user
 ```
 email: admin@gmail.com
 password: Admin@123
 ```
 
+Regular user
 ```
 email: nhut@gmail.com
 password: Nhut@123
