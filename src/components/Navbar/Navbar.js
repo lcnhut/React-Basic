@@ -10,15 +10,19 @@ export default function Navbar() {
     window.localStorage.clear();
   };
 
+  const role = window.localStorage.getItem("userRole");
+
   return (
     <div className="navbar__wrapper">
       <ul className="navbar__list">
         <li>
           <NavLink to="dashboard">Dashboard</NavLink>
         </li>
-        <li>
-          <NavLink to="setting">Setting</NavLink>
-        </li>
+        {role === "admin" && (
+          <li>
+            <NavLink to="setting">Setting</NavLink>
+          </li>
+        )}
       </ul>
 
       <div className="button__wrapper">

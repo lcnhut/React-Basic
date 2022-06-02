@@ -13,7 +13,9 @@ import "./App.scss";
 function App() {
   const { isNotify, toastProperties } = useGlobalData();
   const [isShowNoti, setIsShowNoti] = useState(isNotify);
+
   const role = window.localStorage.getItem("userRole");
+
   useEffect(() => {
     setIsShowNoti(isNotify);
   }, [isNotify]);
