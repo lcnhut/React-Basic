@@ -3,10 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useGlobalData } from "./components/GlobalProvider/GlobalDataProvider";
 import Toast from "./components/Toast/Toast";
 
-import LoginPage from "./pages/Login/LoginPage";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import SettingPage from "./pages/Setting/Setting";
-import NotFoundPage from "./pages/NotFound/NotFound";
+import { LoginPage, Dashboard, SettingPage, NotFoundPage } from "./pages";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import "./App.scss";
 
