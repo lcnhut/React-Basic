@@ -21,7 +21,7 @@ To get a local copy up and running follow these simple example steps.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Installation
-1. Clone the repo and change directory to that folder
+1. Clone the repo
 
     ```sh
     git clone https://github.com/lcnhut/React-Basic.git
