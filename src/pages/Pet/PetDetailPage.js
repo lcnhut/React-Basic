@@ -12,7 +12,7 @@ const PetDetailPage = () => {
 
   const getData = async (petId) => {
     const response = await animalApi.getById(petId);
-    if (response.data && response.data.length > 0) {
+    if (response.data) {
       const dataFormatted = {
         ...response.data,
         createdAt: moment(response.data.createdAt).format("DD/MM/YYYY"),
