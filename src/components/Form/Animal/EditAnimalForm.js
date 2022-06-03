@@ -1,22 +1,35 @@
 import { Form, Input, InputNumber, Modal, Select } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 const { Option } = Select;
 
-const AddAnimalForm = (props) => {
+const EditAnimalForm = (props) => {
   const [form] = Form.useForm();
-  const { handleSubmitForm, visible, onCancel, confirmLoading } = props;
+  const { handleSubmitForm, visible, onCancel, confirmLoading, animalData } =
+    props;
+
+  useEffect(() => {
+    form.setFieldsValue({
+      name: animalData.name,
+      type: animalData.type,
+      age: animalData.age,
+    });
+  }, [animalData]);
 
   const handleCancel = () => {
     onCancel();
   };
 
   const onFinish = (values) => {
-    handleSubmitForm(values);
+    const submitValues = {
+      ...values,
+      id: animalData.id,
+    };
+    handleSubmitForm(submitValues);
   };
 
   return (
     <Modal
-      title="Add Animal Form"
+      title="Edit Animal Form"
       visible={visible}
       onOk={() => {
         form
@@ -32,7 +45,15 @@ const AddAnimalForm = (props) => {
       confirmLoading={confirmLoading}
       onCancel={handleCancel}
     >
-      <Form form={form} name="control-hooks">
+      <Form
+        form={form}
+        name="control-hooks"
+        initialValues={{
+          name: animalData.name,
+          age: animalData.age,
+          type: animalData.type,
+        }}
+      >
         <Form.Item
           name="name"
           label="Name"
@@ -79,4 +100,4 @@ const AddAnimalForm = (props) => {
   );
 };
 
-export default AddAnimalForm;
+export default EditAnimalForm;

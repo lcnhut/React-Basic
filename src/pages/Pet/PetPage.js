@@ -3,13 +3,15 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { animalApi } from "../../api";
-import { useGlobalData, AddAnimalForm } from "../../components";
+import { useGlobalData, AddAnimalForm, EditAnimalForm } from "../../components";
 
 const PetPage = () => {
   const [petData, setPetData] = useState([]);
   const { isLoading, setLoading } = useGlobalData();
-  const [visible, setVisible] = useState(false);
+  const [visibleAddForm, setVisibleAddForm] = useState(false);
+  const [visibleEditForm, setVisibleEditForm] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [animalData, setAnimalData] = useState({});
 
   const navigate = useNavigate();
 
@@ -23,13 +25,14 @@ const PetPage = () => {
         };
       });
       setPetData(dataFormatted);
+      // setLoading(!isLoading);
     }
   };
 
   //   Call API to get data
   useEffect(() => {
     getPetData();
-  }, []);
+  }, [confirmLoading, visibleAddForm, visibleEditForm]);
 
   const handleClickRow = (id) => {
     navigate(`${id}`);
@@ -64,28 +67,49 @@ const PetPage = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button type="primary">Edit</Button>
+          <Button type="primary" onClick={() => handleOnClickEdit(record)}>
+            Edit
+          </Button>
           <Button type="danger">Delete</Button>
         </Space>
       ),
     },
   ];
 
-  const showModal = () => {
-    setVisible(true);
+  const showModalAddForm = () => {
+    setVisibleAddForm(true);
   };
 
-  const onCancel = () => {
-    setVisible(false);
+  const onCancelAddForm = () => {
+    setVisibleAddForm(false);
   };
 
-  const handleSubmitForm = async (values) => {
+  const handleSubmitAddForm = async (values) => {
     setConfirmLoading(true);
     const response = await animalApi.add(values);
     if (response.status === 201) {
       setConfirmLoading(false);
-      setVisible(false);
+      setVisibleAddForm(false);
       message.success("A new animal is added!!!");
+    }
+  };
+
+  const handleOnClickEdit = (data) => {
+    setAnimalData(data);
+    setVisibleEditForm(true);
+  };
+
+  const onCloseEditForm = () => {
+    setVisibleEditForm(false);
+  };
+
+  const handleOnSubmitEditForm = async (values) => {
+    setConfirmLoading(true);
+    const response = await animalApi.edit(values);
+    if (response.status === 200) {
+      setConfirmLoading(false);
+      setVisibleEditForm(false);
+      message.success(`${values.name} is updated!!!`);
     }
   };
 
@@ -96,18 +120,30 @@ const PetPage = () => {
       ) : (
         <div style={{ marginTop: "70px" }}>
           <AddAnimalForm
-            handleSubmitForm={handleSubmitForm}
-            showModal={showModal}
-            visible={visible}
+            handleSubmitForm={handleSubmitAddForm}
+            showModal={showModalAddForm}
+            visible={visibleAddForm}
             confirmLoading={confirmLoading}
-            onCancel={onCancel}
+            onCancel={onCancelAddForm}
+          />
+          <EditAnimalForm
+            handleSubmitForm={handleOnSubmitEditForm}
+            showModal={handleOnClickEdit}
+            visible={visibleEditForm}
+            confirmLoading={confirmLoading}
+            onCancel={onCloseEditForm}
+            animalData={animalData}
           />
           <Table
             dataSource={petData}
             columns={columns}
             style={{ marginTop: "20px" }}
           />
-          <Button type="primary" onClick={showModal} style={{ width: "100%" }}>
+          <Button
+            type="primary"
+            onClick={showModalAddForm}
+            style={{ width: "100%" }}
+          >
             Add new animal
           </Button>
         </div>

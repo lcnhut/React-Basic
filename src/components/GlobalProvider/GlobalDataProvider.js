@@ -34,8 +34,8 @@ function GlobalDataProvider(props) {
     }
   };
 
-  const setLoading = () => {
-    setIsLoading(!isLoading);
+  const setLoading = (value) => {
+    setIsLoading(value);
   };
 
   const providerValues = {
