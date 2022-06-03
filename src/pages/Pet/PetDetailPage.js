@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { animalApi } from "../../api";
+import { PageHeader, Descriptions } from "antd";
+import moment from "moment";
+
 const PetDetailPage = () => {
   const [petDetailData, setPetDetailData] = useState({});
   const params = useParams();
+  const navigate = useNavigate();
   const petId = params.id;
 
   const getData = async (petId) => {
     const response = await animalApi.getById(petId);
-    setPetDetailData(response.data);
+    if (response.data && response.data.length > 0) {
+      const dataFormatted = {
+        ...response.data,
+        createdAt: moment(response.data.createdAt).format("DD/MM/YYYY"),
+      };
+      setPetDetailData(dataFormatted);
+    } else {
+      navigate("/*");
+    }
   };
 
   useEffect(() => {
@@ -16,11 +28,29 @@ const PetDetailPage = () => {
   }, []);
 
   return (
-    <div style={{ marginTop: "100px" }}>
-      <h1>ID:{petDetailData.id}</h1>
-      <h1>Name: {petDetailData.name}</h1>
-      <h1>Type: {petDetailData.type}</h1>
-      <h1>Age: {petDetailData.age}</h1>
+    <div
+      className="site-page-header-ghost-wrapper"
+      style={{ padding: "24px", backgroundColor: "#f5f5f5" }}
+    >
+      <PageHeader
+        ghost={false}
+        onBack={() => window.history.back()}
+        title="Pet Information"
+        subTitle={petDetailData.name}
+      >
+        <Descriptions size="small" column={2}>
+          <Descriptions.Item label="Name">
+            {petDetailData.name}
+          </Descriptions.Item>
+          <Descriptions.Item label="Type">
+            {petDetailData.type}
+          </Descriptions.Item>
+          <Descriptions.Item label="Age">{petDetailData.age}</Descriptions.Item>
+          <Descriptions.Item label="Created At">
+            {petDetailData.createdAt}
+          </Descriptions.Item>
+        </Descriptions>
+      </PageHeader>
     </div>
   );
 };

@@ -89,9 +89,12 @@ const EditAnimalForm = (props) => {
             placeholder="Select a option and change input text above"
             allowClear
           >
-            <Option value="dog">male</Option>
-            <Option value="cat">female</Option>
+            <Option value="dog">dog</Option>
+            <Option value="cat">cat</Option>
             <Option value="dinosaur">dinosaur</Option>
+            <Option value="lion">lion</Option>
+            <Option value="platypus">platypus</Option>
+            <Option value="crocodile">crocodile</Option>
             <Option value="other">other</Option>
           </Select>
         </Form.Item>

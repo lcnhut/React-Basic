@@ -135,7 +135,7 @@ const PetPage = () => {
       {isLoading ? (
         <Spin />
       ) : (
-        <div style={{ marginTop: "70px" }}>
+        <>
           <AddAnimalForm
             handleSubmitForm={handleSubmitAddForm}
             showModal={showModalAddForm}
@@ -152,11 +152,7 @@ const PetPage = () => {
             animalData={animalData}
           />
 
-          <Table
-            dataSource={petData}
-            columns={columns}
-            style={{ marginTop: "20px" }}
-          />
+          <Table dataSource={petData} columns={columns} />
           {role === "admin" && (
             <Button
               type="primary"
@@ -166,7 +162,7 @@ const PetPage = () => {
               Add new animal
             </Button>
           )}
-        </div>
+        </>
       )}
     </>
   );

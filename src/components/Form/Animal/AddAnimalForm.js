@@ -68,8 +68,8 @@ const AddAnimalForm = (props) => {
             placeholder="Select a option and change input text above"
             allowClear
           >
-            <Option value="dog">male</Option>
-            <Option value="cat">female</Option>
+            <Option value="dog">dog</Option>
+            <Option value="cat">cat</Option>
             <Option value="dinosaur">dinosaur</Option>
             <Option value="other">other</Option>
           </Select>
