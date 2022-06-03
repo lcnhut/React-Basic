@@ -6,7 +6,7 @@ https://react-basic-nfq-course.netlify.app/
 
 This project is a collection of tasks from my ReactJS class.
 
-## Getting Started  🥵
+## Getting Started  😎
 
 This is an example of how you may give instructions on setting up our project locally.
 To get a local copy up and running follow these simple example steps.
@@ -47,6 +47,8 @@ To get a local copy up and running follow these simple example steps.
     
     The page will reload when you make changes.
     You may also see any lint errors in the console.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 ## Usage  👀
