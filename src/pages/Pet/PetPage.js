@@ -3,7 +3,12 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { animalApi } from "../../api";
-import { useGlobalData, AddAnimalForm, EditAnimalForm } from "../../components";
+import {
+  useGlobalData,
+  AddAnimalForm,
+  EditAnimalForm,
+  ButtonDelete,
+} from "../../components";
 
 const PetPage = () => {
   const [petData, setPetData] = useState([]);
@@ -38,6 +43,15 @@ const PetPage = () => {
     navigate(`${id}`);
   };
 
+  const handleOnDelete = async (animal) => {
+    setConfirmLoading(true);
+    const response = await animalApi.delete(animal.id);
+    if (response.status === 200) {
+      setConfirmLoading(false);
+      message.success(`${animal.name} is deleted!!!`);
+    }
+  };
+
   const columns = [
     {
       title: "Name",
@@ -70,7 +84,7 @@ const PetPage = () => {
           <Button type="primary" onClick={() => handleOnClickEdit(record)}>
             Edit
           </Button>
-          <Button type="danger">Delete</Button>
+          <ButtonDelete handleOnConfirm={() => handleOnDelete(record)} />
         </Space>
       ),
     },

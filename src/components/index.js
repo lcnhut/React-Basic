@@ -8,6 +8,8 @@ import {
   GlobalDataProvider,
 } from "./GlobalProvider/GlobalDataProvider";
 
+import ButtonDelete from "./Button/ButtonDelete";
+
 export {
   Input,
   Loader,
@@ -19,4 +21,5 @@ export {
   Navbar,
   useGlobalData,
   GlobalDataProvider,
+  ButtonDelete,
 };
