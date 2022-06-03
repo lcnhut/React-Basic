@@ -1,4 +1,4 @@
-import { Button, Modal, Space, Spin, Table } from "antd";
+import { Button, message, Space, Spin, Table } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -81,15 +81,11 @@ const PetPage = () => {
 
   const handleSubmitForm = async (values) => {
     setConfirmLoading(true);
-    // setTimeout(() => {
-    //   console.log(values);
-    //   setConfirmLoading(false);
-    //   setVisible(false);
-    // }, 3000);
     const response = await animalApi.add(values);
     if (response.status === 201) {
       setConfirmLoading(false);
       setVisible(false);
+      message.success("A new animal is added!!!");
     }
   };
 

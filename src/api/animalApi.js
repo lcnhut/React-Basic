@@ -13,9 +13,9 @@ export const animalApi = {
       });
   },
 
-  getById: (petId) => {
+  getById: (animalId) => {
     return axios
-      .get(`${API_URL}/${petId}`)
+      .get(`${API_URL}/${animalId}`)
       .then((response) => {
         return response;
       })
@@ -24,14 +24,39 @@ export const animalApi = {
       });
   },
 
-  add: (data) => {
-    console.log(data);
+  add: (animal) => {
     return axios
       .post(API_URL, {
-        name: data.name,
-        type: data.type,
-        age: data.age,
+        name: animal.name,
+        type: animal.type,
+        age: animal.age,
       })
+      .then((response) => {
+        return response;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },
+
+  edit: (animal) => {
+    return axios
+      .put(`${API_URL}/${animal.id}`, {
+        name: animal.name,
+        type: animal.type,
+        age: animal.age,
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },
+
+  delete: (animalId) => {
+    return axios
+      .delete(`${API_URL}/${animalId}`)
       .then((response) => {
         return response;
       })
