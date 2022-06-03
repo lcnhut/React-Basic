@@ -23,6 +23,9 @@ export default function Navbar() {
             <NavLink to="setting">Setting</NavLink>
           </li>
         )}
+        <li>
+          <NavLink to="pet">Pet</NavLink>
+        </li>
       </ul>
 
       <div className="button__wrapper">
