@@ -6,6 +6,7 @@ import {
   NotFoundPage,
   PetPage,
   SettingPage,
+  PetDetailPage,
 } from "./pages";
 import "./App.scss";
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="setting" element={<SettingPage />} />
           )}
           <Route path="pet" element={<PetPage />} />
+          <Route path="pet/:id" element={<PetDetailPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

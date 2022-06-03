@@ -34,10 +34,15 @@ function GlobalDataProvider(props) {
     }
   };
 
+  const setLoading = () => {
+    setIsLoading(!isLoading);
+  };
+
   const providerValues = {
     isLoading,
     register,
     login,
+    setLoading,
   };
 
   return (
