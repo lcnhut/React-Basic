@@ -19,6 +19,7 @@ const PetPage = () => {
   const [animalData, setAnimalData] = useState({});
 
   const navigate = useNavigate();
+  const role = window.localStorage.getItem("userRole");
 
   const getPetData = async () => {
     const response = await animalApi.getAll();
@@ -65,6 +66,7 @@ const PetPage = () => {
       title: "Age",
       dataIndex: "age",
       key: "age",
+      sorter: (a, b) => a.age - b.age,
     },
     {
       title: "Type",
@@ -79,14 +81,15 @@ const PetPage = () => {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button type="primary" onClick={() => handleOnClickEdit(record)}>
-            Edit
-          </Button>
-          <ButtonDelete handleOnConfirm={() => handleOnDelete(record)} />
-        </Space>
-      ),
+      render: (_, record) =>
+        role === "admin" && (
+          <Space size="middle">
+            <Button type="primary" onClick={() => handleOnClickEdit(record)}>
+              Edit
+            </Button>
+            <ButtonDelete handleOnConfirm={() => handleOnDelete(record)} />
+          </Space>
+        ),
     },
   ];
 
@@ -148,18 +151,21 @@ const PetPage = () => {
             onCancel={onCloseEditForm}
             animalData={animalData}
           />
+
           <Table
             dataSource={petData}
             columns={columns}
             style={{ marginTop: "20px" }}
           />
-          <Button
-            type="primary"
-            onClick={showModalAddForm}
-            style={{ width: "100%" }}
-          >
-            Add new animal
-          </Button>
+          {role === "admin" && (
+            <Button
+              type="primary"
+              onClick={showModalAddForm}
+              style={{ width: "100%" }}
+            >
+              Add new animal
+            </Button>
+          )}
         </div>
       )}
     </>
