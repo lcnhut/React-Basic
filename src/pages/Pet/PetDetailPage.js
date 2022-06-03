@@ -18,8 +18,6 @@ const PetDetailPage = () => {
         createdAt: moment(response.data.createdAt).format("DD/MM/YYYY"),
       };
       setPetDetailData(dataFormatted);
-    } else {
-      navigate("/*");
     }
   };
 
