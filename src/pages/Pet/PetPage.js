@@ -1,15 +1,17 @@
-import { Button, Space, Spin, Table } from "antd";
+import { Button, Modal, Space, Spin, Table } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { animalApi } from "../../apis";
-import { useGlobalData } from "../../components";
+import { useGlobalData, AddAnimalForm } from "../../components";
 
 const PetPage = () => {
   const [petData, setPetData] = useState([]);
+  const { isLoading, setLoading } = useGlobalData();
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { isLoading, setLoading } = useGlobalData();
 
   const getPetData = async () => {
     const response = await animalApi.getAll();
@@ -69,16 +71,45 @@ const PetPage = () => {
     },
   ];
 
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const onCancel = () => {
+    setVisible(false);
+  };
+
+  const handleSubmitForm = (values) => {
+    setConfirmLoading(true);
+    setTimeout(() => {
+      console.log(values);
+      setConfirmLoading(false);
+      setVisible(false);
+    }, 3000);
+  };
+
   return (
     <>
       {isLoading ? (
         <Spin />
       ) : (
-        <Table
-          dataSource={petData}
-          columns={columns}
-          style={{ marginTop: "50px" }}
-        />
+        <div style={{ marginTop: "70px" }}>
+          <AddAnimalForm
+            handleSubmitForm={handleSubmitForm}
+            showModal={showModal}
+            visible={visible}
+            confirmLoading={confirmLoading}
+            onCancel={onCancel}
+          />
+          <Table
+            dataSource={petData}
+            columns={columns}
+            style={{ marginTop: "20px" }}
+          />
+          <Button type="primary" onClick={showModal} style={{ width: "100%" }}>
+            Add new animal
+          </Button>
+        </div>
       )}
     </>
   );

@@ -3,7 +3,6 @@ export default function SettingPage() {
   return (
     <div
       style={{
-        backgroundColor: "rgb(237, 124, 150)",
         width: "100%",
         height: "100vh",
       }}
