@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { animalApi } from "../../apis";
+import { animalApi } from "../../api";
 const PetDetailPage = () => {
   const [petDetailData, setPetDetailData] = useState({});
   const params = useParams();
