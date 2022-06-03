@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Loader,
-  LoginForm,
-  RegisterForm,
-  useGlobalData,
-} from "../../components";
+import { LoginForm, RegisterForm, useGlobalData } from "../../components";
+import { notification } from "antd";
 import "./LoginPage.scss";
 
 const LoginPage = () => {
-  const { isLoading, register, login, notification, showNoti, hideNoti } =
-    useGlobalData();
+  const { isLoading, register, login } = useGlobalData();
 
   const [isActiveLoginForm, setIsActiveLoginForm] = useState(true);
   const [isActiveRegisterForm, setIsActiveRegisterForm] = useState(false);
@@ -27,62 +22,62 @@ const LoginPage = () => {
   };
 
   const handleOnSubmitRegisterForm = async () => {
-    hideNoti();
     await register();
     if (!isLoading) {
       handleOnSwitchToLogin();
-      notification.success("Success", "Register Successfully!!!");
-      showNoti();
+      notification["success"]({
+        message: "Success",
+        description: "Register Successfully!!!",
+      });
     }
   };
 
   const handleOnSubmitLoginForm = async (user) => {
-    hideNoti();
     const data = await login(user);
     if (!isLoading && data.userId) {
       navigate("/dashboard");
-      notification.success("Success", "Login Successfully!!!");
-      showNoti();
+      notification["success"]({
+        message: "Success",
+        description: "Login Successfully!!!",
+      });
     } else if (!isLoading && data.message) {
-      notification.error("Failure", data.message);
-      showNoti();
+      notification["error"]({
+        message: "Notification Title",
+        description: data.message,
+      });
     }
   };
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className="login__page__container">
-          <div className="login__page__wrapper">
-            <div className="login__page__heading">
-              <a href="#">Logdy</a>
-              <div>
-                <button
-                  onClick={handleOnSwitchToLogin}
-                  className={isActiveLoginForm ? "active" : ""}
-                >
-                  Login
-                </button>
-                <button
-                  onClick={handleOnSwitchToRegister}
-                  className={isActiveRegisterForm ? "active" : ""}
-                >
-                  Register
-                </button>
-              </div>
+      <div className="login__page__container">
+        <div className="login__page__wrapper">
+          <div className="login__page__heading">
+            <a href="#">Logdy</a>
+            <div>
+              <button
+                onClick={handleOnSwitchToLogin}
+                className={isActiveLoginForm ? "active" : ""}
+              >
+                Login
+              </button>
+              <button
+                onClick={handleOnSwitchToRegister}
+                className={isActiveRegisterForm ? "active" : ""}
+              >
+                Register
+              </button>
             </div>
-            {isActiveLoginForm ? (
-              <LoginForm handleOnSubmitLoginForm={handleOnSubmitLoginForm} />
-            ) : (
-              <RegisterForm
-                handleOnSubmitRegisterForm={handleOnSubmitRegisterForm}
-              />
-            )}
           </div>
+          {isActiveLoginForm ? (
+            <LoginForm handleOnSubmitLoginForm={handleOnSubmitLoginForm} />
+          ) : (
+            <RegisterForm
+              handleOnSubmitRegisterForm={handleOnSubmitRegisterForm}
+            />
+          )}
         </div>
-      )}
+      </div>
     </>
   );
 };

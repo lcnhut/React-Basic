@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Input from "../../Input";
+import { useGlobalData } from "../../index.js";
 import "../Form.scss";
+import { Button } from "antd";
 
 const LoginForm = (props) => {
+  const { isLoading } = useGlobalData();
+
   const { handleOnSubmitLoginForm } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,8 +57,6 @@ const LoginForm = (props) => {
     if (password === "") {
       setPasswordError("This field is required");
     } else if (emailError === "" && passwordError === "") {
-      setEmail("");
-      setPassword("");
       handleOnSubmitLoginForm({
         email,
         password,
@@ -88,9 +90,13 @@ const LoginForm = (props) => {
             onBlur={handleOnBlurPassword}
             error={passwordError}
           />
-          <button className="submit__button" type="submit">
+          <Button
+            loading={isLoading}
+            className="submit__button"
+            htmlType="submit"
+          >
             Login
-          </button>
+          </Button>
         </div>
       </div>
     </form>

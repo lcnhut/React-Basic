@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useGlobalData } from "./components";
-import { LoginPage, Dashboard, SettingPage, NotFoundPage } from "./pages";
-import { ProtectedRoute, Toast } from "./components";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { ProtectedRoute } from "./components";
+import { Dashboard, LoginPage, NotFoundPage, SettingPage } from "./pages";
 import "./App.scss";
 
 function App() {
-  const { isNotify, toastProperties } = useGlobalData();
-  const [isShowNoti, setIsShowNoti] = useState(isNotify);
-
   const role = window.localStorage.getItem("userRole");
-
-  useEffect(() => {
-    setIsShowNoti(isNotify);
-  }, [isNotify]);
 
   return (
     <div className="App">
@@ -34,15 +25,6 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
-      {isShowNoti && (
-        <Toast
-          toast={toastProperties}
-          position="top-right"
-          autoDelete={true}
-          autoDeleteTime={3000}
-        />
-      )}
     </div>
   );
 }

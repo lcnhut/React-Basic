@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Input from "../../Input";
+import { Button } from "antd";
 import "../Form.scss";
+import { useGlobalData } from "../../index.js";
 
 const RegisterForm = (props) => {
+  const { isLoading } = useGlobalData();
+
   const { handleOnSubmitRegisterForm } = props;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -94,11 +98,6 @@ const RegisterForm = (props) => {
       passwordError === "" &&
       confirmPasswordError === ""
     ) {
-      setName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-
       handleOnSubmitRegisterForm();
     }
   };
@@ -146,9 +145,16 @@ const RegisterForm = (props) => {
             onBlur={handleOnBlurConfirmPassword}
             error={confirmPasswordError}
           />
-          <button className="submit__button" type="submit">
+          {/* <button className="submit__button" type="submit">
             Register
-          </button>
+          </button> */}
+          <Button
+            className="submit__button"
+            loading={isLoading}
+            htmlType="submit"
+          >
+            Register
+          </Button>
         </div>
       </div>
     </form>
