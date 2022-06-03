@@ -26,13 +26,19 @@ To get a local copy up and running follow these simple example steps.
     ```sh
     git clone https://github.com/lcnhut/React-Basic.git
     ```
-2. Install all dependencies
+    
+2. Change directory to that folder
+
+    ```sh
+    cd React-Basic
+    ```
+3. Install all dependencies
 
     ```sh
     npm i
     ```
 
-3. Build and serve the websites
+4. Build and serve the websites
 
     ```sh
     npm start
