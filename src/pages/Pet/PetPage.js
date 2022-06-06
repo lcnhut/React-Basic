@@ -84,7 +84,11 @@ const PetPage = () => {
       render: (_, record) =>
         role === "admin" && (
           <Space size="middle">
-            <Button type="primary" onClick={() => handleOnClickEdit(record)}>
+            <Button
+              type="primary"
+              ghost
+              onClick={() => handleOnClickEdit(record)}
+            >
               Edit
             </Button>
             <ButtonDelete handleOnConfirm={() => handleOnDelete(record)} />

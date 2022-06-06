@@ -16,7 +16,9 @@ const ButtonDelete = ({ handleOnConfirm }) => {
       okText="Yes"
       cancelText="No"
     >
-      <Button type="danger">Delete</Button>
+      <Button type="danger" ghost>
+        Delete
+      </Button>
     </Popconfirm>
   );
 };
