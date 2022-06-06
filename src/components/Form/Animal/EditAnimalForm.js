@@ -13,6 +13,7 @@ const EditAnimalForm = (props) => {
       type: animalData.type,
       age: animalData.age,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animalData]);
 
   const handleCancel = () => {
@@ -45,15 +46,7 @@ const EditAnimalForm = (props) => {
       confirmLoading={confirmLoading}
       onCancel={handleCancel}
     >
-      <Form
-        form={form}
-        name="control-hooks"
-        initialValues={{
-          name: animalData.name,
-          age: animalData.age,
-          type: animalData.type,
-        }}
-      >
+      <Form form={form} name="control-hooks">
         <Form.Item
           name="name"
           label="Name"

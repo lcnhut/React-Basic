@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { animalApi } from "../../api";
-import { PageHeader, Descriptions } from "antd";
+import { Descriptions, PageHeader } from "antd";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { animalApi } from "../../api";
 
 const PetDetailPage = () => {
   const [petDetailData, setPetDetailData] = useState({});
   const params = useParams();
-  const navigate = useNavigate();
   const petId = params.id;
 
   const getData = async (petId) => {
@@ -23,6 +22,7 @@ const PetDetailPage = () => {
 
   useEffect(() => {
     getData(petId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
