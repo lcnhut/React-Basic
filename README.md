@@ -32,7 +32,7 @@ To get a local copy up and running follow these simple example steps.
     ```sh
     cd React-Basic
     ```
-3. Install all dependencies
+3. Install all dependencies, please install everytime you pull new code
 
     ```sh
     npm i
