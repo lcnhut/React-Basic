@@ -1,4 +1,4 @@
-import { Button, message, Space, Spin, Table } from "antd";
+import { Button, message, Space, Spin, Table, Tag } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +28,7 @@ const PetPage = () => {
         return {
           ...item,
           createdAt: moment(item.createdAt).format("DD/MM/YYYY"),
+          type: item.type.toLowerCase(),
         };
       });
       setPetData(dataFormatted);
@@ -72,7 +73,49 @@ const PetPage = () => {
       title: "Type",
       dataIndex: "type",
       key: "type",
+      render: (type) => {
+        let color = "";
+        switch (type) {
+          case "cat":
+            color = "magenta";
+            break;
+          case "dog":
+            color = "purple";
+            break;
+          case "dinosaur":
+            color = "geekblue";
+            break;
+          case "snake":
+            color = "orange";
+            break;
+          case "human":
+            color = "cyan";
+            break;
+          case "lion":
+            color = "volcano";
+            break;
+          case "crocodile":
+            color = "red";
+            break;
+          case "platypus":
+            color = "volcano";
+            break;
+          case "other":
+            color = "green";
+            break;
+          default:
+            color = "blue";
+            break;
+        }
+
+        return (
+          <Tag color={color} key={type}>
+            {type.toUpperCase()}
+          </Tag>
+        );
+      },
     },
+
     {
       title: "Created At",
       dataIndex: "createdAt",
